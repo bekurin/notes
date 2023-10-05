@@ -3,7 +3,7 @@
 spring boot 3.1.0을 사용하면 Testcontainers에서 사용하는 Docker-compose 파일을 자동으로 사용할 수 있다. local, dev 프로필을 분리하여 관리하면 보다 간편하게 사용할 수 있음
 
 ---
-### 본문: 
+### 본문: spring boot 3.1 docker-compose support 사용하기
 
 프로젝트는 협업을 하기 위한 playground이기 때문에 별다른 설정없이 간편하게 실행해볼 수 있어야합니다. 이에 더해 테스트 환경은 운영/개발 환경에서 사용하는 것과 동일하게 설정해줄 필요가 있습니다.
 
