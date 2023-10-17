@@ -18,33 +18,49 @@ testcontainers를 설정할 때 GernericContainer, MysqlContainer, RedisContaine
 
 docker-compose 작성
 ```
-// Docker-compose mysql 설정
+version: '3.8'
 
+services:
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_HOST: '%'
+      MYSQL_DATABASE: 'core'
+      MYSQL_ROOT_USER: 'root'
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+      TZ: Asia/Seoul
+    ports:
+      - "3306:3306"
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+```
+
+## docker-compose 명령어
+
+### docker-compose 실행
+
+```
 docker-compose up -d
+```
+### mysql workbench 연결
+workbench Test connection 메뉴를 사용하여 정상적으로 데이터베이스에 연결되는지 확인한다.
+
+### 저장 API 호출 후 mysql workbench 확인
+로컬환경에서 정상적으로 동작하는지 확인하기 위해 API를 호출하여 잘 저장되는지 확인한다.
+
+### docker-compose 종료
+
+```
 docker-compose down
 ```
 
-docker-compose 명령어
+## 테스트 환경 구축
+통합 테스트 환경을 구축하고, application.yml 파일을 정의해준다.
+통합 테스트를 실행하여 docker container가 정상적으로 로드되는지 확인하고, 테스트가 통과하는지 확인한다.
 
-docker-compose 실행
-
-```
-docker-compose up -d
-```
-
-mysql workbench 연결
-
-
-저장 API 호출 후 mysql workbench 확안
-
-docker-compose 종료
-
-```
-docker-compose down
-```
-
-
-
+### github actions에서 정상적으로 동작하는지 확인
+github actions runner images에 이미 docker daemon이 설치되어 있다. 따라서 ./gradlew build 와 같은 명령어들이 정상적으로 동작한다.
 
 ---
 ### 참고문헌
