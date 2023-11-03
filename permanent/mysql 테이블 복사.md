@@ -18,6 +18,8 @@ INSERT INTO <new_table> SELECT * FROM <current_table>;
 
 바로 모든 인덱스와 pk, fk 제약조건이 복사, 적용되지 않고 테이블이 생성되기 때문에 잘못하면 pk가 중복된 값, unique index에 걸려야하는 값들이 생성되게 됩니다.
 
+말 그대로 복사만 진행한다. 
+
 ---
 ### 참고문헌
 - 

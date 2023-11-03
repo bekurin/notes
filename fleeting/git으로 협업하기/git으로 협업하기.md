@@ -4,8 +4,8 @@
 
 ---
 ### 연결 문서
-- git cherry-pick
-- git stash
+- [[git cherry-pick]]
+- [[git stash]]
 - git checkout
 - git branch
 - git commit
