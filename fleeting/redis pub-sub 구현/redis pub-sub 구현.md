@@ -4,7 +4,7 @@
 ### 본문:
 
 redis를 사용하여 pub/sub을 구현하는 경우 아래 명령어를 활용해 볼 수 있다.
-- PING
+-     
 - PSUBSCRIBE
 - PUNSUBSCRIBE
 - QUIT
