@@ -45,15 +45,15 @@ rollbackRules는 RuleBasedTransactionAttribute 초기화 시에 설정되는 값
 - `NoRollbackRuleAttribute` 은 `RollbackRuleAttribute`을 상속한다.
 
 RuleBasedTransactionAttribute의 rollbackOn은 다음과 같은 순서로 동작한다.
-1. 롤백 규칙 초기화: rollbackRules는 RuleBasedTransactionAttribute 초기화 시에 설정되는 값으로 각 규칙은 `RollbackRuleAttribute` 또는 `NoRollbackRuleAttribute` 객체이다.
-	- `NoRollbackRuleAttribute` 은 `RollbackRuleAttribute`을 상속한다.
-2. 예외와 일치하는 depth 계산: getDepth 함수는 전달받은 `Throwable` 객체(예외)에 대해, 각 롤백 규칙과의 일치 여부를 검사한다. `getDepth` 함수는 예외 타입이 규칙과 일치하는지, 그리고 얼마나 "깊이" 일치하는지를 반환한다. 가장 깊은 예외(deepest match)를 찾는다.
-3. 우선순위 결정: 예외 타입이 여러 규칙과 일치할 수 있기 때문에, 가장 후보가 될 수 있는 예외를 찾는다(`deepest` 변수 사용). `deepest`는 일치하는 규칙의 "깊이"를 나타내며, 더 낮은 값이 더 구체적인 일치를 의미한다.
-4. 롤백 여부 결정: `winner` 변수에는 후보가 될 예외를 저장한다. 이 규칙이 `NoRollbackRuleAttribute` 객체라면, 메소드는 `false`를 반환하여 롤백을 하지 않도록 합니다. 그렇지 않으면 `super.rollbackOn(ex)`를 호출하여 기본 롤백 로직을 따른다.
+rollbackRules를 초기화 하면서 파라미터로 주어진 예외가 getDepth에 매칭이 되는지 확인한다.
+getDepth에 매칭되는 예외가 하나라도 있다면 winner에 값이 채워지고 이때, winner가 NoRollbackRuleAttribute 인스턴스라면 롤백을 하지 않고, RollbackRuleAttribute 인스턴스라면 롤백을 진행한다.
+
+그렇다면 rollbackRules는 어디서 초기화 되는 것인가?
+TxAdviceDefinitionParser 클래스의 parseAttributeSource 함수 내부에서 설정을 해주게 되는데. 이 값은 Transactional annotation에 있는 rollbackFor, noRollbackFor에 저장된 값이 들어가게 된다.
 
 ---
 ### 참고문헌
-- 
+- TxAdviceBeanDefinitionParser 도 살펴보자.
 ---
 ### 연결문서
 - 
