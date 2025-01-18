@@ -4,7 +4,7 @@
 ### 본문:
 argoCD, gitops를 사용하여 간편하게 preview 환경을 구축할 수 있도록 합니다.
 
-![[preview-environment.png]]
+![[permanent/preview 환경 구축/image/preview-environment.png]]
 위와 같이 총 4단계로 구현이 된다.
 
 동일한 application set과 application set controller가 동일한 namespace에 존재해야한다. argocd v2.6 이상 부터는 기본 namespace에 application set controller가 존재하는 것으로 파악된다. 
